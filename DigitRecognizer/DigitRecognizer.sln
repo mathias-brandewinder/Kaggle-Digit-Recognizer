@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DigitRecognizer", "DigitRecognizer\DigitRecognizer.fsproj", "{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Console", "Console\Console.fsproj", "{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
