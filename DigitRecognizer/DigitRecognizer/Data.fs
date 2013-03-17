@@ -74,3 +74,26 @@ module Data =
             |> Seq.map (fun e -> writer (model e))
             |> Seq.toArray
         File.WriteAllLines(resultFile, data)
+
+    // create submission file by processing
+    // line-by-line through stream
+    let stream (sourceFile: string)
+               (resultFile: string)
+               (model: Model)
+               (objectreader: ValidationReader)
+               (objectwriter: OutcomeWriter) =
+        use reader = new TextFieldParser(sourceFile)
+        reader.TextFieldType <- FieldType.Delimited
+        reader.SetDelimiters(",")
+        use writer = new StreamWriter(resultFile)
+        let append (line: string) = writer.WriteLine(line)
+
+        let input = seq { while (not reader.EndOfData) do yield reader.ReadFields() }
+        input
+        |> Seq.skip 1
+        |> Seq.iter (fun line ->
+               line
+               |> objectreader
+               |> model
+               |> objectwriter
+               |> append)
