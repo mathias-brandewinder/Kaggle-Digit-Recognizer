@@ -16,7 +16,7 @@ let main argv =
     
     let sampleSize = 5000
     let neighbors = 9
-    let model = ClearLines.DigitRecognizer.KnnModel.train (learningSample |> Seq.take sampleSize) neighbors
+    let model = ClearLines.DigitRecognizer.KnnModel.train learningSample neighbors
 
     quality (learningSample |> Seq.skip sampleSize |> Seq.take 200) model
     speed (learningSample |> Seq.skip sampleSize |> Seq.take 200) model
