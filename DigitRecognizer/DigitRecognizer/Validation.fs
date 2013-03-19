@@ -24,6 +24,5 @@ module Validation =
         timer.Stop()
 
         printfn "Sample time: %i" timer.ElapsedMilliseconds
-        let ms = (int)timer.ElapsedMilliseconds * size / (run.Length)
-        let time = new TimeSpan(0,0,0,0,ms)
+        let time = TimeSpan.FromTicks(timer.ElapsedTicks * (int64)size / (int64)(run.Length))
         printfn "Estimated time: %s" (time.ToString())
