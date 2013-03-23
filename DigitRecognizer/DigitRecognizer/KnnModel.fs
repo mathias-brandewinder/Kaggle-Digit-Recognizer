@@ -15,14 +15,42 @@ module KnnModel =
     // to avoid int overflow in L3 calculation
     let simplify (obs: Observation) =
         Array.map (fun x -> x / 10) obs
+    
+    let rows = 28
+    let cols = 28
+
+    // "Sliding" aggregate of pixels by k x k blocks
+    let windowed k (obs: Observation) = [|
+        for row in 0 .. (rows - k) do
+            for col in 0 .. (cols - k) do
+                let neighbors = seq {
+                    for r in 0 .. (k - 1) do
+                        for c in 0 .. (k - 1) do
+                            yield obs.[ (row + r) * cols + (col + c) ] }
+                yield Seq.sum neighbors |]
+    // Aggregation of pixels by non-overlapping k x k blocks
+    let squared k (obs: Observation) = [|
+        for row in 0 .. k .. (rows - k) do
+            for col in 0 .. k .. (cols - k) do
+                let neighbors = seq {
+                    for r in 0 .. (k - 1) do
+                        for c in 0 .. (k - 1) do
+                            yield obs.[ (row + r) * cols + (col + c) ] }
+                yield Seq.sum neighbors |]
+
+    let w2 = windowed 2
+    let s2 = squared 2
+
+    let transform (obs: Observation) = 
+        s2 obs |> Array.map (fun x -> x / 64)
 
     let train (sample: Example seq) k =
         let data = 
             sample
-            |> Seq.map (fun (obs, lbl) -> simplify obs, lbl)
+            |> Seq.map (fun (obs, lbl) -> transform obs, lbl)
             |> Seq.toArray
         let classify (obs: Observation) =
-            let simplified = simplify obs
+            let simplified = transform obs
             data
             |> Array.Parallel.map(fun o -> o, L3 (fst o) simplified)
             |> Array.sortBy snd

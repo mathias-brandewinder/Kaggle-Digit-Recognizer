@@ -13,13 +13,14 @@ let main argv =
     printfn "Loading data file"
     let examplesPath = dataPath + examplesFile
     let learningSample = load examplesPath exampleReader
-    
+    printfn "Loaded data file"
+
     let sampleSize = 5000
     let neighbors = 9
     let model = ClearLines.DigitRecognizer.KnnModel.train learningSample neighbors
 
-    quality (learningSample |> Seq.skip sampleSize |> Seq.take 200) model
-    speed (learningSample |> Seq.skip sampleSize |> Seq.take 200) model
+    quality (learningSample |> Seq.skip sampleSize |> Seq.take 500) model
+    speed (learningSample |> Seq.skip sampleSize |> Seq.take 50) model
 
     printfn "Creating submission file"
 
