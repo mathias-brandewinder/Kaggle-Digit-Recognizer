@@ -42,7 +42,13 @@ module KnnModel =
     let s2 = squared 2
 
     let transform (obs: Observation) = 
-        s2 obs |> Array.map (fun x -> x / 64)
+        obs |> Array.map (float)
+
+    let cosine v1 v2 =
+        let top = Array.fold2 (fun acc x1 x2 -> acc + x1 * x2) 0. v1 v2
+        let n1 = v1 |> Array.fold (fun acc x -> acc + x * x) 0. |> sqrt
+        let n2 = v2 |> Array.fold (fun acc x -> acc + x * x) 0. |> sqrt
+        -0.5 - 0.5 * top / (n1 * n2)
 
     let train (sample: Example seq) k =
         let data = 
@@ -52,7 +58,7 @@ module KnnModel =
         let classify (obs: Observation) =
             let simplified = transform obs
             data
-            |> Array.Parallel.map(fun o -> o, L3 (fst o) simplified)
+            |> Array.Parallel.map(fun o -> o, cosine (fst o) simplified)
             |> Array.sortBy snd
             |> Array.toSeq
             |> Seq.take k
