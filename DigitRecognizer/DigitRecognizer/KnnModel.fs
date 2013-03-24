@@ -38,11 +38,11 @@ module KnnModel =
                             yield obs.[ (row + r) * cols + (col + c) ] }
                 yield Seq.sum neighbors |]
 
-    let w2 = windowed 2
+    let w3 = windowed 3
     let s2 = squared 2
 
     let transform (obs: Observation) = 
-        obs |> Array.map (float)
+        w3 obs |> Array.map (float)
 
     let cosine v1 v2 =
         let top = Array.fold2 (fun acc x1 x2 -> acc + x1 * x2) 0. v1 v2
