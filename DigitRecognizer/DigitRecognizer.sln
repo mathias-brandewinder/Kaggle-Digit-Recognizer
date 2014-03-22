@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DigitRecognizer", "DigitRecognizer\DigitRecognizer.fsproj", "{B66FD7EF-CC6C-44B2-853D-D3E1714615EB}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Console", "Console\Console.fsproj", "{182DF494-CDD8-43CF-A8EE-D23A0E9E12EA}"
